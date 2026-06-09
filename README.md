@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# 🎲 El Comerciante Nana - Sistema de Gestión Full-Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido al repositorio oficial de **El Comerciante Nana**! Este es un sistema integral desarrollado para la gestión administrativa, catálogo de juegos de mesa y control de eventos/torneos.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías Utilizadas
+Este proyecto está construido con una arquitectura moderna separando el cliente del servidor:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Frontend (Interfaz de Usuario):**
+*   **React + Vite:** Para una experiencia de usuario rápida y fluida.
+*   **Recharts:** Generación de gráficos estadísticos en tiempo real.
+*   **jsPDF & AutoTable:** Exportación de reportes administrativos en formato PDF.
+*   **Google reCAPTCHA:** Seguridad contra bots en el registro y acceso.
+*   **Bootstrap / CSS Custom:** Diseño responsivo y moderno (Efecto Cristal).
 
-## React Compiler
+**Backend (Lógica y Servidor):**
+*   **NestJS:** Framework progresivo de Node.js para un backend escalable y robusto.
+*   **TypeORM:** Mapeo objeto-relacional para consultas seguras.
+*   **Bcrypt:** Encriptación de contraseñas de alta seguridad.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Base de Datos:**
+*   **PostgreSQL:** Motor de base de datos relacional robusto.
 
-## Expanding the ESLint configuration
+## ✨ Características Principales
+1.  **Autenticación y Seguridad:** Registro e inicio de sesión con encriptación de datos, validación por reCAPTCHA y registro silencioso de logs de acceso (IP, fecha y navegador).
+2.  **CRUD con Eliminación Lógica:** Gestión completa del inventario de juegos (Crear, Leer, Actualizar, Eliminar). Los registros eliminados no se borran de la BD, solo se desactivan para mantener la integridad histórica.
+3.  **Panel de Control Administrativo:** Dashboard exclusivo con visualización de datos estadísticos interactivos.
+4.  **Generación de Reportes:** Descarga automática de inventario en PDF con un solo clic.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Instalación Local (Entorno de Desarrollo)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Para ejecutar este proyecto en tu máquina local, necesitas tener instalado Node.js y PostgreSQL.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**1. Clonar el repositorio:**
+\`\`\`bash
+git clone https://github.com/alejandroyujra8/ProyectoBackendComercianteNana.git
+\`\`\`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**2. Levantar el Backend:**
+\`\`\`bash
+cd comerciante-nana-backend
+npm install
+npm run start:dev
+\`\`\`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**3. Levantar el Frontend:**
+Abre una nueva terminal en la raíz del proyecto.
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
+El sistema estará disponible en \`http://localhost:5173\`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*Desarrollado con pasión para la materia de Backend / DevOps.*
