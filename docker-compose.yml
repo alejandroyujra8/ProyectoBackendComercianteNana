@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: nana_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: comerciante_nana
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./comerciante-nana-backend
+    container_name: nana_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+    container_name: nana_frontend
+    ports:
+      - "80:80" # El contenedor expone el puerto 80 (HTTP por defecto)
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
