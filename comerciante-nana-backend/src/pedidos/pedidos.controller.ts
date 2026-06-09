@@ -1,19 +1,42 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
 import { PedidosService } from './pedidos.service';
+import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../auth/admin.guard';
+import { CreatePedidoDto } from './dto/create-pedido.dto';
 
 @Controller('pedidos')
 export class PedidosController {
   constructor(private readonly pedidosService: PedidosService) {}
 
-  // ruta para procesar la compra desde react
   @Post('comprar')
-  procesarCompra(@Body() datosCompra: { id_usuario: number, carrito: any[] }) {
-    return this.pedidosService.procesarCompra(datosCompra.id_usuario, datosCompra.carrito);
+  @UseGuards(AuthGuard)
+  procesarCompra(
+    @Body() datosCompra: CreatePedidoDto,
+    @Req() req: Request & { usuario?: { id_usuario: number } },
+  ) {
+    return this.pedidosService.procesarCompra(Number(req.usuario?.id_usuario), datosCompra.carrito);
   }
 
-  // ruta para que el cliente vea sus compras pasadas
   @Get('historial/:id')
-  verHistorial(@Param('id') id: string) {
-    return this.pedidosService.verHistorial(+id);
+  @UseGuards(AuthGuard)
+  verHistorial(
+    @Param('id') id: string,
+    @Req() req: Request & { usuario?: { id_usuario: number; rol: string } },
+  ) {
+    const idConsultado = Number(id);
+    const usuarioToken = req.usuario;
+
+    if (usuarioToken?.rol !== 'ADMIN' && Number(usuarioToken?.id_usuario) !== idConsultado) {
+      throw new ForbiddenException('No puedes revisar compras de otro usuario.');
+    }
+
+    return this.pedidosService.verHistorial(idConsultado);
+  }
+
+  @Get('estadisticas/mas-vendidos')
+  @UseGuards(AuthGuard, AdminGuard)
+  juegosMasVendidos() {
+    return this.pedidosService.juegosMasVendidos();
   }
 }

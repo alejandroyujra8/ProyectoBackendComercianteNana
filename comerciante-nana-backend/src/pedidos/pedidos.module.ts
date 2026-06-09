@@ -4,10 +4,11 @@ import { PedidosService } from './pedidos.service';
 import { PedidosController } from './pedidos.controller';
 import { Pedido } from './entities/pedido.entity';
 import { DetallePedido } from './entities/detalle-pedido.entity';
+import { Juego } from '../juegos/entities/juego.entity';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Module({
-  // importo mis dos tablas para poder usarlas en el servicio
-  imports: [TypeOrmModule.forFeature([Pedido, DetallePedido])],
+  imports: [TypeOrmModule.forFeature([Pedido, DetallePedido, Juego, Usuario])],
   controllers: [PedidosController],
   providers: [PedidosService],
 })

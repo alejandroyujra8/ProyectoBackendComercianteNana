@@ -17,9 +17,11 @@ export class Usuario {
   @Column({ type: 'varchar', length: 255 })
   contrasenia: string;
 
-  // Nuestro nuevo campo para diferenciar al dueño de los clientes
   @Column({ type: 'varchar', length: 20, default: 'CLIENTE' })
   rol: string;
+
+  @Column({ type: 'boolean', default: true })
+  activo: boolean;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha_registro: Date;

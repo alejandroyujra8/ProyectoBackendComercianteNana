@@ -14,7 +14,15 @@ export class Evento {
   @Column({ type: 'timestamp' })
   fecha_evento: Date;
 
-  // mi llave foranea para saber en que sucursal es el torneo
-  @Column()
+  @Column({ type: 'int', default: 1 })
   id_sucursal: number;
+
+  @Column({ type: 'text', nullable: true })
+  descripcion: string;
+
+  @Column({ type: 'int', default: 32 })
+  cupo_maximo: number;
+
+  @Column({ type: 'boolean', default: true })
+  activo: boolean;
 }

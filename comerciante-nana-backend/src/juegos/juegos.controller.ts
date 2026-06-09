@@ -1,13 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JuegosService } from './juegos.service';
-import { Juego } from './entities/juego.entity';
+import { CreateJuegoDto } from './dto/create-juego.dto';
+import { UpdateJuegoDto } from './dto/update-juego.dto';
+import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../auth/admin.guard';
 
-@Controller('juegos') // La ruta será: http://localhost:3000/juegos
+@Controller('juegos')
 export class JuegosController {
   constructor(private readonly juegosService: JuegosService) {}
 
   @Post()
-  create(@Body() datosJuego: Partial<Juego>) {
+  @UseGuards(AuthGuard, AdminGuard)
+  create(@Body() datosJuego: CreateJuegoDto) {
     return this.juegosService.create(datosJuego);
   }
 
@@ -22,11 +26,13 @@ export class JuegosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() datosActualizar: Partial<Juego>) {
+  @UseGuards(AuthGuard, AdminGuard)
+  update(@Param('id') id: string, @Body() datosActualizar: UpdateJuegoDto) {
     return this.juegosService.update(+id, datosActualizar);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard, AdminGuard)
   remove(@Param('id') id: string) {
     return this.juegosService.remove(+id);
   }
