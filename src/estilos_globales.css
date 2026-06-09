@@ -1,0 +1,98 @@
+
+:root {
+  --bg-app: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --text-main: #111827;
+  --text-muted: #6B7280;
+  --border-subtle: #E5E7EB;
+    --purple-accent: #8B5CF6;
+  --purple-grad: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  --guindo-accent: #7C1C3B;
+  --purple-grad: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  --guindo-grad: linear-gradient(135deg, #7C1C3B 0%, #5A1429 100%);
+  --amber-grad: linear-gradient(to bottom right, #F59E0B, #D97706);
+  --emerald-grad: linear-gradient(to bottom right, #10B981, #059669);
+  --text-main: #111827;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --naranja-grad: linear-gradient(135deg, #F97316 0%, #C2410C 100%);
+  --cafe-grad: linear-gradient(135deg, #78350F 0%, #451A03 100%);
+  --crema-grad: linear-gradient(to bottom right, #FDE047, #EAB308);
+  --verde-grad: linear-gradient(to bottom right, #10B981, #059669);
+  --text-main: #291C14;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+.btn-apple {
+  background-color: var(--text-main);
+  color: #FFFFFF;
+  border-radius: 9999px; /* rounded-full */
+  font-weight: 500;
+  border: none;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 200ms ease;
+}
+
+.btn-apple:hover {
+  background-color: #1F2937; 
+  color: #FFFFFF;
+}
+
+
+.tarjeta_estetica {
+  background-color: var(--bg-surface);
+  border-radius: 24px; /* redondeado grande */
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 200ms ease;
+}
+
+.tarjeta_estetica:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.boton_categoria {
+  border-radius: 20px;
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  text-align: left;
+  transition: transform 200ms ease;
+}
+
+.boton_categoria:hover {
+  transform: translateY(-4px); 
+}
+
+.boton_categoria::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+}
+
+.boton_categoria h5 {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  margin: 0;
+}
